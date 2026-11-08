@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Coach Sportif Virtuel</title>
+  <meta name="description" content="Analyse de posture en temps réel dans le navigateur : squats et pompes, comptage des répétitions, feedback vocal." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app" class="container">
+    <header>
+      <h1>Coach Sportif Virtuel</h1>
+      <p class="subtitle">Analyse de posture en temps réel — Squats &amp; Pompes</p>
+    </header>
+
+    <main class="main-grid">
+      <section class="video-panel">
+        <div class="video-wrap mirrored" id="videoWrap">
+          <video id="video" autoplay playsinline muted></video>
+          <canvas id="overlay"></canvas>
+          <div class="status" id="status">Chargement de la caméra…</div>
+        </div>
+        <div class="mini-controls">
+          <label for="exercise">Exercice</label>
+          <select id="exercise">
+            <option value="squat">Squat</option>
+            <option value="pushup">Pompes</option>
+          </select>
+          <button id="startBtn" class="btn primary" disabled>Démarrer</button>
+          <button id="calibrateBtn" class="btn" disabled>Calibrer</button>
+        </div>
+      </section>
+
+      <aside class="stats-panel">
+        <div class="card">
+          <h2>Session</h2>
+          <div class="stat-row"><strong>Répétitions</strong><span id="reps">0</span></div>
+          <div class="stat-row"><strong>État</strong><span id="state">—</span></div>
+          <div class="stat-row"><strong>Angle</strong><span id="angle">—</span></div>
+          <div class="stat-row"><strong>Feedback</strong><span id="feedback">—</span></div>
+        </div>
+
+        <div class="card">
+          <h3>Options</h3>
+          <label><input type="checkbox" id="audioFeedback" checked /> Feedback vocal</label>
+          <label><input type="checkbox" id="mirrorVideo" checked /> Miroir</label>
+          <label>Images/s max : <span id="fpsValue">30</span>
+            <input id="fpsInput" type="range" min="5" max="60" value="30" /></label>
+          <div class="buttons">
+            <button id="saveBtn" class="btn">Exporter CSV</button>
+            <button id="resetBtn" class="btn">Réinitialiser</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Calibration</h3>
+          <p>Clique sur <em>Calibrer</em>, puis fais 3 mouvements lents et complets.</p>
+          <div class="calib-info">
+            <div>Min : <span id="calMin">—</span></div>
+            <div>Max : <span id="calMax">—</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Historique</h3>
+          <ul class="history" id="history"><li class="empty">Aucune séance enregistrée.</li></ul>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <small>Astuce : place-toi à 2–3 mètres de la caméra pour que tout le corps soit visible. Lumière uniforme recommandée. Les images restent sur ton appareil : rien n'est envoyé sur internet.</small>
+    </footer>
+  </div>
+
+  <!-- TensorFlow.js + MoveNet (pose detection) -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core@4.12.0/dist/tf-core.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter@4.12.0/dist/tf-converter.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl@4.12.0/dist/tf-backend-webgl.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/pose-detection@2.1.3/dist/pose-detection.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
