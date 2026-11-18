@@ -4,6 +4,8 @@ A virtual fitness coach that runs entirely in the browser. It watches you throug
 
 No server, no install, no account: the video never leaves your computer.
 
+**[▶ Try it live](https://haytamzerr.github.io/ai-fitness-coach/)** (allow camera access, stand 2–3 m back)
+
 > Interface in French. Built as a university project at UEMF (supervised by Mr. Abderrahim Waga), December 2025.
 
 ## Features
@@ -74,3 +76,7 @@ script.js    camera, model, angles, rep counter, calibration, voice, history, ex
 - A small classifier trained on recorded sessions to recognise form errors
 - Progress charts from the session history
 - Kalman filter instead of the moving average for smoother angles
+
+## License
+
+[MIT](LICENSE)
